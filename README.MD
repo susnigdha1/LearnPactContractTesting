@@ -2,7 +2,7 @@
 
 Contract testing is a very important and integral part of testing microservices.
 It is an agreement between the producer/provider and the consumer of web/micro services,
-that establishes rules for permitted operations, data exchange, responses, and security.
+that establish rules for permitted operations, data exchange, responses, and security.
 The data exchange must follow a specification, known as schema, which defines the data
 types, data structures and object hierarchies. Popular data exchange formats are
 XML and JSON.
@@ -14,7 +14,7 @@ Always refer to the official site for latest documentation on PACT and its newly
 released libraries. The same principle applies for Java and SpringBoot.
 The test classes cover 3 different but important styles of running the tests, using:
 1. MockServer
-2. RestController method
+2. RestController method with MockMvcTestTarget
 3. SpringBootTest
 
 **Project structure:**
