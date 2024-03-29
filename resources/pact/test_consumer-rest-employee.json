@@ -1,0 +1,159 @@
+{
+  "consumer": {
+    "name": "test_consumer"
+  },
+  "interactions": [
+    {
+      "description": "A request is made to add an employee information",
+      "providerStates": [
+        {
+          "name": "A request is made to add an employee information"
+        }
+      ],
+      "request": {
+        "body": {
+          "employee_designation": "Associate",
+          "employee_id": "MA233",
+          "employee_joining_date": "23/09/2021"
+        },
+        "generators": {
+          "body": {
+            "$.employee_id": {
+              "regex": "[A-Z]{2}[0-9]{3}",
+              "type": "Regex"
+            }
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$.employee_designation": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.employee_id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "[A-Z]{2}[0-9]{3}"
+                }
+              ]
+            },
+            "$.employee_joining_date": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "method": "POST",
+        "path": "/addEmployee"
+      },
+      "response": {
+        "status": 201
+      }
+    },
+    {
+      "description": "A request is made to view an employee information",
+      "providerStates": [
+        {
+          "name": "A request is made to view an employee information"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/getEmployee"
+      },
+      "response": {
+        "body": [
+          {
+            "employee_designation": "Associate",
+            "employee_id": "OF747",
+            "employee_joining_date": "23/09/2021"
+          }
+        ],
+        "generators": {
+          "body": {
+            "$[*].employee_id": {
+              "regex": "[A-Z]{2}[0-9]{3}",
+              "type": "Regex"
+            }
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].employee_designation": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].employee_id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "[A-Z]{2}[0-9]{3}"
+                }
+              ]
+            },
+            "$[*].employee_joining_date": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.4.9"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "rest-employee"
+  }
+}
